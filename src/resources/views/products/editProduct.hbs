@@ -1,0 +1,40 @@
+<h3>Sửa sản phẩm</h3>
+<form  method="POST" action="/products/{{product._id}}?_method=PUT" class="mt-5">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="productId">Mã sản phẩm</label>
+            <input type="text" class="form-control" id="productId" name="productId" value="{{product.productId}}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="productName">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="productName" name="productName" value="{{product.productName}}">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="amountProduct">Số lượng</label>
+            <input type="text" class="form-control" id="amountProduct" name="productAmount" value="{{product.productAmount}}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="productPrice">Đơn giá</label>
+            <input type="text" class="form-control" id="productPrice" name="productPrice" value="{{product.productPrice}}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="productDateIn">Ngày nhập</label>
+            <input type="text" class="form-control" id="productDateIn" name="productDateIn" value="{{product.productDateIn}}">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="unit">Đơn vị tính</label>
+            <input type="text" class="form-control" id="unit" name="unit" value="{{product.unit}}">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="description">Mô tả</label>
+            <textarea name="description" class="form-control" id="description" rows="3">{{product.productId}}</textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </div>
+</form>

@@ -1,0 +1,40 @@
+<h3>Thêm sản phẩm</h3>
+<form method="POST" action="/products/store" class="mt-5">
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="productId">Mã sản phẩm</label>
+            <input type="text" class="form-control" id="productId" name="productId">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="productName">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="productName" name="productName">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="amountProduct">Số lượng</label>
+            <input type="text" class="form-control" id="amountProduct" name="productAmount">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="productPrice">Đơn giá</label>
+            <input type="text" class="form-control" id="productPrice" name="productPrice">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="productDateIn">Ngày nhập</label>
+            <input type="text" class="form-control" id="productDateIn" name="productDateIn">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="unit">Đơn vị tính</label>
+            <input type="text" class="form-control" id="unit" name="unit">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="description">Mô tả</label>
+            <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </div>
+</form>
