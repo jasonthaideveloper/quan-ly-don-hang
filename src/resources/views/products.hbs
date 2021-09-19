@@ -1,99 +1,84 @@
+<form name="container-form" method="POST" action="/products/handle-form-action">
+    <div class="container">
+        <h3 class="mb-3">Quản lý sản phẩm</h3>
 
-{{!-- <div class="row mt-3">
-    {{#each products}}
-    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
-        <div class="card border-primary mb-3">
-            <div class="embed-responsive embed-responsive-4by3">
-                <a href="/products/{{this.slug}}" class="detail">
-                    <img class="card-img-top embed-responsive-item" src="/img/product-img/{{this.img}}" alt="{{this.productName}}">
-                </a>
-            </div>
-            <div class="card-body">
-                <a href="/products/{{this.slug}}" class="detail">
-                    <h5 class="card-title"><strong>{{this.productName}}</strong></h5>
-                </a>
-                <p class="card-text">{{this.productPrice}} VNĐ</p>
-                <div class="row">
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
-                        <a type="button" class="btn btn-primary btn-block" href="/products/{{this._id}}/edit">
-                            Sửa
-                        </a>
-                    </div>
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
-                        <a type="button" class="btn btn-danger btn-block" href="/products/{{this._id}}/edit">
-                            Xóa
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    {{/each}}
-</div> --}}
-
-<div class="container">
-    <h3 class="mb-3">Danh sách sản phẩm</h3>
-    <h6>
-        <a type="button" class="btn btn-primary" href="/me/storage/products">
+        <a type="button" class="btn btn-primary" href="products/storage">
             <i class="fas fa-archive"></i>
             Kho lưu trữ: <span class="badge badge-light">{{deletedCount}}</span>
         </a>
-    </h6>
-</div>
-
-<div class="mt-4">
-    <ul class="list-group">
-        <li class="list-group-item">
-            <div class="row">
-
-                {{#each products}}
-                <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                    <div class="card border-primary mb-3">
-                        {{!-- <div class="card-header container bg-primary text-right">
-                            <span class="badge badge-light">{{sum @index 1}}</span>
-                        </div> --}}
-                        <div class="embed-responsive embed-responsive-4by3">
-                            <a href="/products/{{this.slug}}" class="detail">
-                                <img class="card-img-top embed-responsive-item" src="{{this.img}}"
-                                    alt="{{this.productName}}">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <a href="/products/{{this.slug}}" class="detail">
-                                <h5 class="card-title"><strong>{{uppercase this.productName 9}}</strong></h5>
-                            </a>
-                            <p class="card-text">{{this.productPrice}} VNĐ</p>
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
-                                    <a type="button" class="btn btn-outline-primary btn-block"
-                                        href="/products/{{this._id}}/edit">
-                                        Sửa
-                                    </a>
+        <div class="mt-4 d-flex align-items-center">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="check-all">
+                <label class="form-check-label" for="check-all">
+                    Chọn tất cả
+                </label>
+            </div>
+            <select class="form-control form-control-sm" name="action" id="select-option" required="required">
+                <option value="">--Hành động--</option>
+                <option value="delete">Xóa</option>
+            </select>
+            <button class="btn btn-primary btn-sm btn-submit-all" disabled="disabled">
+                Thực hiện
+            </button>
+        </div>
+    </div>
+    <div class="mt-4">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    {{#each products}}
+                    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                        <div class="card border-primary mb-3">
+                            <div class="container">
+                                <div class="row">
+                                    <h4><span class="badge badge-light">#{{sum @index 1}}</span></h4>
+                                    <div class="form-check ml-auto">
+                                        <input class="form-check-input" type="checkbox" name="productIds[]"
+                                            value="{{this._id}}">
+                                    </div>
                                 </div>
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
-                                    <!-- Button trigger modal -->
-                                    <a href="" type="button" class=" btn btn-outline-danger btn-block"
-                                        data-id="{{this._id}}" data-toggle="modal" data-target="#deleteModal">
-                                        Xóa
-                                    </a>
+                            </div>
+                            <div class="embed-responsive embed-responsive-4by3">
+                                <a href="/products/{{this.slug}}" class="detail">
+                                    <img class="card-img-top embed-responsive-item" src="{{this.img}}"
+                                        alt="{{this.productName}}">
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <a href="/products/{{this.slug}}" class="detail">
+                                    <h6 class="card-title"><strong>{{uppercase this.productName 9}}</strong></h6>
+                                </a>
+                                <p class="card-text">{{this.productPrice}} VNĐ</p>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <a type="button" class="btn btn-outline-primary btn-block"
+                                            href="/products/{{this._id}}/edit">
+                                            Sửa
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+                                        <!-- Button trigger modal -->
+                                        <a href="" type="button" class=" btn btn-outline-danger btn-block"
+                                            data-id="{{this._id}}" data-toggle="modal" data-target="#deleteModal">
+                                            Xóa
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {{else}}
+                    <div class="container text-center">
+                        <p>Bạn chưa có sản phẩm nào. <br>
+                            <a class="mt-3" href="/products/create">Bấm vào đây để nhập sản phẩm</a>
+                        </p>
+                    </div>
+                    {{/each}}
                 </div>
-                {{else}}
-                <div class="container text-center">
-                    <p>Bạn chưa có sản phẩm nào. <br>
-                        <a class="mt-3" href="/products/create">Bấm vào đây để nhập sản phẩm</a>
-                    </p>
-                </div>
-                {{/each}}
-            </div>
-        </li>
-    </ul>
-</div>
-
+            </li>
+        </ul>
+    </div>
+</form>
 
 {{!-- confirm delete product --}}
 <!-- Modal -->
@@ -125,6 +110,11 @@
         var productId;
         var btnDeleteProduct = document.getElementById('btn-delete-product');
         var deleteForm = document.forms['delete-product'];
+        var checkAll = $('#check-all');
+        var productItemCheckbox = $('input[name="productIds[]"]');
+        var checkAllSubmitBtn = $('.btn-submit-all');
+        var containerForm = $('form[name="container-form"]');
+
         $('#deleteModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             productId = button.data('id');
@@ -133,34 +123,30 @@
         btnDeleteProduct.onclick = function () {
             deleteForm.action = '/products/' + productId + '?_method=DELETE';
             deleteForm.submit();
+        };
+
+        // Checkbox all changed
+        checkAll.change(function () {
+            var isCheckedAll = $(this).prop('checked');
+            productItemCheckbox.prop('checked', isCheckedAll);
+            renderCheckAllSubmitBtn();
+        })
+
+        // Checkbox all changed
+        productItemCheckbox.change(function () {
+            var isCheckedAll = productItemCheckbox.length === $('input[name="productIds[]"]:checked').length;
+            checkAll.prop('checked', isCheckedAll);
+            renderCheckAllSubmitBtn();
+        })
+
+        // Re-render check all submit button
+        function renderCheckAllSubmitBtn() {
+            var checkedCount = $('input[name="productIds[]"]:checked').length;
+            if (checkedCount > 0) {
+                checkAllSubmitBtn.attr('disabled', false);
+            } else {
+                checkAllSubmitBtn.attr('disabled', true);
+            }
         }
     })
 </script>
-
-{{!-- <table class="table table-bordered table-hover mt-3">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col" class="width-100">Mã sản phẩm</th>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Số lượng</th>
-            <th scope="col">Đơn giá</th>
-            <th scope="col">Ngày nhập</th>
-            <th scope="col">Ngày xuất</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        {{#each products}}
-        <tr>
-            <th scope="row">1</th>
-            <td>{{this.productId}}</td>
-            <td>{{this.productName}}</td>
-            <td>{{this.productAmount}}</td>
-            <td>{{this.productPrice}}</td>
-            <td>{{this.productDateIn}}</td>
-            <td>{{this.productDateOut}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table> --}}

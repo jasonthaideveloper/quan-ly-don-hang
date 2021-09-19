@@ -30,7 +30,7 @@ app.engine('hbs', handlebars({
   helpers: {
     sum: (a, b) => a + b,
     uppercase: (string, num) => {
-      let strUpper = string.toUpperCase();
+      let strUpper = string;
       return strUpper.length > num ? strUpper.slice(0, num) + '...' : strUpper;
     },
     formatDate: (deletedAt) => {
@@ -41,7 +41,6 @@ app.engine('hbs', handlebars({
       var d = date.getDate();
       var m = date.getMonth()+1;
       var y = date.getFullYear();
-      console.log(`${d}/${m}/${y}`);
       return `${h}:${min}:${s} ${d}/${m}/${y}`;
     }
   }

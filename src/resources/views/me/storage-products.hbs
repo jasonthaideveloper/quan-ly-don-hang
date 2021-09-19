@@ -1,5 +1,5 @@
 <div class="container">
-    <h6><a href="/me/stored/products"><i class="fas fa-chevron-left"></i> Quay lại</a></h6>
+    <h6><a href="/products"><i class="fas fa-chevron-left"></i> Quay lại</a></h6>
     <h3 class="mt-3">Sản phẩm đã lưu trữ</h3>
 </div>
 
@@ -14,9 +14,9 @@
                             <h4><span class="badge badge-light"># {{sum @index 1}}</span></h4>
                         </div>
                         <div class="card-body">
-                            <a href="/products/{{this.slug}}" class="detail">
+                            
                                 <h6 class="card-title"><strong>{{uppercase this.productName 9}}</strong></h6>
-                            </a>
+                            
                             <p class="card-text">{{this.productPrice}} VNĐ</p>
                             <p class="card-text">Thời gian xóa: {{formatDate this.deletedAt}}</p>
                             <div class="row">

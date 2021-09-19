@@ -6,25 +6,28 @@ class ProductController {
     // [GET] /product
     getProduct(req, res, next) {
         Promise.all([Product.find({}), Product.countDocumentsDeleted()])
-            .then(([products, deletedCount]) => 
-                res.render('me/stored-products', {
+            .then(([products, deletedCount]) =>
+                res.render('products', {
                     deletedCount,
                     products: multipleMongooseToObject(products)
                 })
             )
             .catch(next);
-        // Product.find({})
-        //     .then(products => {
-        //         res.render('me/stored-products', {
-        //             products: multipleMongooseToObject(products)
-        //         });
-        //     })
-        //     .catch(next);
+    }
+
+    // [GET] /me/storage/products
+    storageProducts(req, res, next) {
+        Product.findDeleted({})
+            .then(products => {
+                res.render('products/storageProducts', {
+                    products: multipleMongooseToObject(products)
+                });
+            })
+            .catch(next);
     }
 
     // [GET] /product/:slug
     getProductDetail(req, res, next) {
-
         Product.findOne({ slug: req.params.slug })
             .then(product => {
                 res.render('details/productDetail', {
@@ -32,6 +35,21 @@ class ProductController {
                 });
             })
             .catch(next)
+    }
+
+    getDeletedProductDetail(req, res, next) {
+        Promise.all([Product.findDeleted({}), Product.findOne({ slug: req.params.slug })])
+            .then(([products]) => {
+                products.forEach(element => {
+                    if (element.slug == req.params.slug) {
+                        res.render('details/productDeletedDetail', {
+                            product: mongooseToOject(element)
+                        })
+                        console.log(element);
+                    }
+                });
+            })
+            .catch(next);
     }
 
     // [GET] /products/create (render UI)
@@ -44,7 +62,7 @@ class ProductController {
     storeProduct(req, res, next) {
         const product = new Product(req.body);
         product.save()
-            .then(() => res.redirect('me/stored-products'))
+            .then(() => res.redirect('/products'))
             .catch(error => {
 
             })
@@ -88,6 +106,19 @@ class ProductController {
         Product.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next);
+    }
+
+    // [POST] /products/handle-form-action
+    handleFormAction(req, res, next) {
+        switch (req.body.action) {
+            case 'delete':
+                Product.delete({ _id: { $in: req.body.productIds } })
+                    .then(() => res.redirect('back'))
+                    .catch(next);
+                break;
+            default:
+                res.json({ message: 'Action is invalid' });
+        }
     }
 }
 

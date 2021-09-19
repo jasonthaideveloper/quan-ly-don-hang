@@ -4,7 +4,6 @@ const { multipleMongooseToObject, mongooseToOject } = require('../../ultil/mongo
 class MeController {
     // [GET] /me/stored/products
     storedProducts(req, res, next) {
-
         Promise.all([Product.find({}), Product.countDocumentsDeleted()])
             .then(([products, deletedCount]) => 
                 res.render('me/stored-products', {
@@ -13,6 +12,17 @@ class MeController {
                 })
             )
             .catch(next);
+    }
+
+    // [GET] /product/:slug
+    getProductDetail(req, res, next) {
+        Product.findOne({ slug: req.params.slug })
+            .then(product => {
+                res.render('details/productDetail', {
+                    product: mongooseToOject(product),
+                });
+            })
+            .catch(next)
     }
 
     // [GET] /products/edit
