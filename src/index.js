@@ -5,7 +5,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 const methodOverride = require('method-override');
-const route = require ('./routes/routes');
+const route = require('./routes/routes');
 const db = require('./config/db/configDB');
 
 
@@ -16,7 +16,7 @@ db.connect();
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware post
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(methodOverride('_method'));
@@ -26,24 +26,24 @@ app.use(morgan('combined'));
 
 // Template engine
 app.engine('hbs', handlebars({
-  extname: '.hbs',
-  helpers: {
-    sum: (a, b) => a + b,
-    uppercase: (string, num) => {
-      let strUpper = string;
-      return strUpper.length > num ? strUpper.slice(0, num) + '...' : strUpper;
-    },
-    formatDate: (deletedAt) => {
-      var date = new Date(deletedAt);
-      var h = date.getHours();
-      var min = date.getMinutes();
-      var s = date.getSeconds();
-      var d = date.getDate();
-      var m = date.getMonth()+1;
-      var y = date.getFullYear();
-      return `${h}:${min}:${s} ${d}/${m}/${y}`;
+    extname: '.hbs',
+    helpers: {
+        sum: (a, b) => a + b,
+        uppercase: (string, num) => {
+            let strUpper = string;
+            return strUpper.length > num ? strUpper.slice(0, num) + '...' : strUpper;
+        },
+        formatDate: (deletedAt) => {
+            var date = new Date(deletedAt);
+            var h = date.getHours();
+            var min = date.getMinutes();
+            var s = date.getSeconds();
+            var d = date.getDate();
+            var m = date.getMonth() + 1;
+            var y = date.getFullYear();
+            return `${h}:${min}:${s} ${d}/${m}/${y}`;
+        },
     }
-  }
 }));
 app.set('view engine', 'hbs');
 
@@ -58,5 +58,5 @@ app.set('partials', path.join(__dirname, 'public', 'img', 'logo.jpeg'));
 route(app);
 
 app.listen(port, () => {
-  console.log(`App listening at http://localhost:${port}`)
+    console.log(`App listening at http://localhost:${port}`)
 });

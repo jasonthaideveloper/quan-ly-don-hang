@@ -2,10 +2,16 @@
     <div class="container">
         <h3 class="mb-3">Quản lý sản phẩm</h3>
 
-        <a type="button" class="btn btn-primary" href="products/storage">
-            <i class="fas fa-archive"></i>
-            Kho lưu trữ: <span class="badge badge-light">{{deletedCount}}</span>
-        </a>
+        <div class="row container">
+            <a type="button" class="btn btn-primary" href="products/storage">
+                <i class="fas fa-archive"></i>
+                Kho lưu trữ: <span class="badge badge-light">{{deletedCount}}</span>
+            </a>
+            <a type="button" class="btn btn-primary ml-auto" href="products/create">
+                <i class="fas fa-plus"></i>
+                Thêm sản phẩm
+            </a>
+        </div>
         <div class="mt-4 d-flex align-items-center">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="check-all">
